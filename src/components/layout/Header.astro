@@ -1,0 +1,147 @@
+---
+import Logo from "@/components/ui/Logo.astro";
+---
+
+<header
+  id="main-header"
+  class="fixed top-0 left-0 w-full z-50 transition-colors duration-300"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
+    <!-- Logo -->
+    <a href="/" class="shrink-0">
+      <Logo variant="horizontal" dark size="md" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden lg:flex items-center gap-8">
+      <a href="#nosotros" class="text-sm font-medium text-white hover:text-brand-400 transition-colors">
+        Nosotros
+      </a>
+      <a href="#servicios" class="text-sm font-medium text-white hover:text-brand-400 transition-colors">
+        Servicios
+      </a>
+      <a href="#metodologia" class="text-sm font-medium text-white hover:text-brand-400 transition-colors">
+        Metodología
+      </a>
+      <a href="#resultados" class="text-sm font-medium text-white hover:text-brand-400 transition-colors">
+        Resultados
+      </a>
+      <a href="#contacto" class="text-sm font-medium text-white hover:text-brand-400 transition-colors">
+        Contacto
+      </a>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a
+      href="#contacto"
+      class="hidden lg:inline-flex items-center px-5 py-2.5 bg-amber-500 text-brand-900 text-sm font-semibold rounded-lg hover:bg-amber-400 transition-colors"
+    >
+      Hablemos
+    </a>
+
+    <!-- Mobile hamburger button -->
+    <button
+      id="mobile-menu-btn"
+      class="lg:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="burger-top"></span>
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300" id="burger-mid"></span>
+      <span class="block w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="burger-bot"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-brand-900/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 transition-opacity duration-300 opacity-0 pointer-events-none lg:hidden"
+  >
+    <button
+      id="mobile-menu-close"
+      class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-white"
+      aria-label="Cerrar menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <a href="#nosotros" class="mobile-nav-link text-2xl font-medium text-white hover:text-brand-400 transition-colors">
+      Nosotros
+    </a>
+    <a href="#servicios" class="mobile-nav-link text-2xl font-medium text-white hover:text-brand-400 transition-colors">
+      Servicios
+    </a>
+    <a href="#metodologia" class="mobile-nav-link text-2xl font-medium text-white hover:text-brand-400 transition-colors">
+      Metodología
+    </a>
+    <a href="#resultados" class="mobile-nav-link text-2xl font-medium text-white hover:text-brand-400 transition-colors">
+      Resultados
+    </a>
+    <a href="#contacto" class="mobile-nav-link text-2xl font-medium text-white hover:text-brand-400 transition-colors">
+      Contacto
+    </a>
+
+    <a
+      href="#contacto"
+      class="mobile-nav-link mt-4 inline-flex items-center px-8 py-3 bg-amber-500 text-brand-900 text-lg font-semibold rounded-lg hover:bg-amber-400 transition-colors"
+    >
+      Hablemos
+    </a>
+  </div>
+</header>
+
+<script>
+  // ── Scroll: transparent -> solid header ──
+  const header = document.getElementById("main-header")!;
+  function updateHeader() {
+    if (window.scrollY > 40) {
+      header.classList.add("bg-brand-800/90", "backdrop-blur-md", "shadow-lg");
+    } else {
+      header.classList.remove("bg-brand-800/90", "backdrop-blur-md", "shadow-lg");
+    }
+  }
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+
+  // ── Mobile menu toggle ──
+  const menuBtn = document.getElementById("mobile-menu-btn")!;
+  const menuClose = document.getElementById("mobile-menu-close")!;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+  const burgerTop = document.getElementById("burger-top")!;
+  const burgerMid = document.getElementById("burger-mid")!;
+  const burgerBot = document.getElementById("burger-bot")!;
+
+  function openMenu() {
+    mobileMenu.classList.remove("opacity-0", "pointer-events-none");
+    mobileMenu.classList.add("opacity-100", "pointer-events-auto");
+    menuBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    burgerTop.classList.add("rotate-45", "translate-y-[4px]");
+    burgerMid.classList.add("opacity-0");
+    burgerBot.classList.add("-rotate-45", "-translate-y-[4px]");
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.add("opacity-0", "pointer-events-none");
+    mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+    menuBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    burgerTop.classList.remove("rotate-45", "translate-y-[4px]");
+    burgerMid.classList.remove("opacity-0");
+    burgerBot.classList.remove("-rotate-45", "-translate-y-[4px]");
+  }
+
+  menuBtn.addEventListener("click", () => {
+    const isOpen = menuBtn.getAttribute("aria-expanded") === "true";
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  menuClose.addEventListener("click", closeMenu);
+
+  // Close menu when clicking a nav link
+  mobileMenu.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>

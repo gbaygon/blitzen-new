@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Hero from "@/components/sections/Hero.astro";
+import About from "@/components/sections/About.astro";
+import Services from "@/components/sections/Services.astro";
+import Differentiators from "@/components/sections/Differentiators.astro";
+import Methodology from "@/components/sections/Methodology.astro";
+import Results from "@/components/sections/Results.astro";
+import Contact from "@/components/sections/Contact.astro";
+import WhatsAppFab from "@/components/ui/WhatsAppFab.astro";
+---
+
+<BaseLayout
+  title="Blitzen Insights — Inteligencia de Mercados"
+  description="Somos tu socio estratégico para construir áreas comerciales escalables. +10 años transformando empresas B2B y B2C en Argentina."
+>
+  <Header />
+  <main>
+    <Hero />
+    <About />
+    <Services />
+    <Differentiators />
+    <Methodology />
+    <Results />
+    <Contact />
+  </main>
+  <Footer />
+  <WhatsAppFab />
+
+  <!-- Scroll fade-in animation observer -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".fade-in-up").forEach((el) => {
+      observer.observe(el);
+    });
+  </script>
+</BaseLayout>

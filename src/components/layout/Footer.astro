@@ -1,0 +1,83 @@
+---
+import Logo from "@/components/ui/Logo.astro";
+---
+
+<footer class="bg-brand-900 text-slate-400">
+  <!-- Top section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+      <!-- Column 1: Logo & tagline -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <Logo variant="vertical" dark size="md" />
+        <p class="mt-4 text-brand-400 text-sm font-medium">Inteligencia de Mercados</p>
+      </div>
+
+      <!-- Column 2: Enlaces -->
+      <div>
+        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Enlaces</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="#nosotros" class="text-sm hover:text-brand-400 transition-colors">Nosotros</a>
+          </li>
+          <li>
+            <a href="#servicios" class="text-sm hover:text-brand-400 transition-colors">Servicios</a>
+          </li>
+          <li>
+            <a href="#metodologia" class="text-sm hover:text-brand-400 transition-colors">Metodología</a>
+          </li>
+          <li>
+            <a href="#resultados" class="text-sm hover:text-brand-400 transition-colors">Resultados</a>
+          </li>
+          <li>
+            <a href="#contacto" class="text-sm hover:text-brand-400 transition-colors">Contacto</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Servicios -->
+      <div>
+        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Servicios</h4>
+        <ul class="space-y-3">
+          <li><span class="text-sm">Consultoría Comercial</span></li>
+          <li><span class="text-sm">Inteligencia de Datos</span></li>
+          <li><span class="text-sm">Prospección Inteligente</span></li>
+          <li><span class="text-sm">Diagnóstico Comercial</span></li>
+          <li><span class="text-sm">Capacitación & Workshops</span></li>
+          <li><span class="text-sm">Estrategia de Crecimiento</span></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Contacto -->
+      <div>
+        <h4 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contacto</h4>
+        <ul class="space-y-3">
+          <li>
+            <a
+              href="mailto:paula@blitzeninsights.com"
+              class="text-sm hover:text-brand-400 transition-colors"
+            >
+              paula@blitzeninsights.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+541131845820" class="text-sm hover:text-brand-400 transition-colors">
+              (011) 3184-5820
+            </a>
+          </li>
+          <li>
+            <span class="text-sm">Buenos Aires, Argentina</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <p class="text-center text-sm text-slate-400">
+        © 2026 Blitzen Insights. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

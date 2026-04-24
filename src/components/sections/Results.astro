@@ -1,0 +1,137 @@
+---
+/* Results / Resultados section - stats counters & testimonials */
+---
+
+<section id="resultados" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Section heading -->
+    <div class="text-center fade-in-up">
+      <p class="uppercase text-sm tracking-widest font-semibold text-amber-500 mb-3">
+        Resultados
+      </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16">
+        Números que hablan por sí solos
+      </h2>
+    </div>
+
+    <!-- Stats counters -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 stagger-children"
+      data-animate-counters
+    >
+      <div class="text-center p-8 rounded-xl bg-brand-50 fade-in-up">
+        <p class="text-5xl font-bold text-brand-500 mb-2" data-target="10" data-suffix="+">
+          0+
+        </p>
+        <p class="text-lg text-slate-600">años de experiencia</p>
+      </div>
+
+      <div class="text-center p-8 rounded-xl bg-brand-50 fade-in-up">
+        <p class="text-5xl font-bold text-brand-500 mb-2" data-target="200" data-suffix="+">
+          0+
+        </p>
+        <p class="text-lg text-slate-600">empresas transformadas</p>
+      </div>
+
+      <div class="text-center p-8 rounded-xl bg-brand-50 fade-in-up">
+        <p class="text-5xl font-bold text-brand-500 mb-2">
+          B2B & B2C
+        </p>
+        <p class="text-lg text-slate-600">alcance multisectorial</p>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="fade-in-up">
+      <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">
+        Lo que dicen nuestros clientes
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children">
+
+      <!-- Testimonial 1 -->
+      <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 fade-in-up">
+        <p class="text-slate-600 italic mb-6 leading-relaxed">
+          "Blitzen nos ayudó a estructurar un área comercial que
+          antes no existía. En 6 meses duplicamos nuestra generación de
+          leads."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
+            <span class="text-brand-500 font-semibold text-sm">MG</span>
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900 text-sm">María García</p>
+            <p class="text-slate-500 text-sm">Directora Comercial, TechCorp</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 fade-in-up">
+        <p class="text-slate-600 italic mb-6 leading-relaxed">
+          "La calidad de las bases de datos y la inteligencia de mercado que nos
+          proporcionaron fue un diferencial clave para nuestra expansión."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
+            <span class="text-brand-500 font-semibold text-sm">CR</span>
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900 text-sm">Carlos Rodríguez</p>
+            <p class="text-slate-500 text-sm">CEO, InnovaGroup</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 fade-in-up">
+        <p class="text-slate-600 italic mb-6 leading-relaxed">
+          "No son consultores que entregan un PDF y desaparecen. Se involucran,
+          miden y ajustan. Eso marca la diferencia."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
+            <span class="text-brand-500 font-semibold text-sm">LM</span>
+          </div>
+          <div>
+            <p class="font-semibold text-slate-900 text-sm">Laura Méndez</p>
+            <p class="text-slate-500 text-sm">VP de Ventas, SureScale</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Counter animation script -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('[data-target]');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target') || '0');
+        const suffix = counter.getAttribute('data-suffix') || '';
+        let current = 0;
+        const increment = target / 60;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          counter.textContent = Math.floor(current) + suffix;
+        }, 16);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsSection = document.querySelector('[data-animate-counters]');
+if (statsSection) observer.observe(statsSection);
+</script>

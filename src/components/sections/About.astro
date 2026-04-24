@@ -1,0 +1,155 @@
+---
+/* About / Quiénes Somos section */
+---
+
+<section id="nosotros" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left column: text -->
+      <div class="fade-in-up">
+        <p class="uppercase text-sm tracking-widest font-semibold text-amber-500 mb-3">
+          Quiénes Somos
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+          Conocemos el mercado argentino desde adentro
+        </h2>
+
+        <p class="text-lg text-slate-600 leading-relaxed mb-4">
+          Con más de una década de experiencia en inteligencia de
+          mercados, ayudamos a empresas B2B y B2C a construir áreas
+          comerciales que realmente escalan. No aplicamos fórmulas
+          genéricas: diseñamos estrategias basadas en datos reales
+          del mercado argentino.
+        </p>
+
+        <p class="text-lg text-slate-600 leading-relaxed mb-4">
+          Nuestro enfoque combina análisis cuantitativo riguroso con un
+          entendimiento profundo del ecosistema de negocios local. Conocemos los
+          desafíos, las oportunidades y los tiempos de este mercado.
+        </p>
+
+        <blockquote class="border-l-4 border-amber-500 pl-6 my-8">
+          <p class="italic text-xl text-slate-800 font-medium">
+            “No somos proveedores, somos socios. Tu crecimiento es nuestro
+            compromiso.”
+          </p>
+        </blockquote>
+      </div>
+
+      <!-- Right column: decorative SVG graphic -->
+      <div class="fade-in-up">
+        <div class="aspect-square rounded-2xl bg-brand-50 p-8 flex items-center justify-center">
+          <svg
+            viewBox="0 0 400 400"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            aria-hidden="true"
+          >
+            <!-- Lighthouse-beam arcs radiating from bottom-left focal point -->
+            <!-- Outer arcs (lightest) -->
+            <path
+              d="M60 340 A280 280 0 0 1 340 60"
+              stroke="var(--color-brand-200)"
+              stroke-width="1.5"
+              stroke-dasharray="6 8"
+            />
+            <path
+              d="M60 340 A240 240 0 0 1 300 100"
+              stroke="var(--color-brand-200)"
+              stroke-width="1.5"
+              stroke-dasharray="6 8"
+            />
+
+            <!-- Mid arcs -->
+            <path
+              d="M60 340 A200 200 0 0 1 260 140"
+              stroke="var(--color-brand-500)"
+              stroke-width="2"
+              stroke-opacity="0.5"
+            />
+            <path
+              d="M60 340 A160 160 0 0 1 220 180"
+              stroke="var(--color-brand-500)"
+              stroke-width="2"
+              stroke-opacity="0.6"
+            />
+            <path
+              d="M60 340 A120 120 0 0 1 180 220"
+              stroke="var(--color-brand-500)"
+              stroke-width="2.5"
+              stroke-opacity="0.7"
+            />
+
+            <!-- Inner arcs (strongest) -->
+            <path
+              d="M60 340 A80 80 0 0 1 140 260"
+              stroke="var(--color-brand-500)"
+              stroke-width="3"
+            />
+
+            <!-- Straight ray lines from focal point -->
+            <line x1="60" y1="340" x2="340" y2="60"  stroke="var(--color-brand-500)" stroke-width="1" stroke-opacity="0.25" />
+            <line x1="60" y1="340" x2="360" y2="120" stroke="var(--color-brand-500)" stroke-width="1" stroke-opacity="0.2" />
+            <line x1="60" y1="340" x2="370" y2="190" stroke="var(--color-brand-500)" stroke-width="1" stroke-opacity="0.15" />
+            <line x1="60" y1="340" x2="300" y2="40"  stroke="var(--color-brand-500)" stroke-width="1" stroke-opacity="0.2" />
+            <line x1="60" y1="340" x2="200" y2="30"  stroke="var(--color-brand-500)" stroke-width="1" stroke-opacity="0.15" />
+
+            <!-- Data node circles along the arcs -->
+            <!-- Amber accent nodes (key data points) -->
+            <circle cx="140" cy="260" r="6"  fill="var(--color-amber-500)" />
+            <circle cx="220" cy="180" r="5"  fill="var(--color-amber-500)" />
+            <circle cx="300" cy="100" r="7"  fill="var(--color-amber-500)" />
+            <circle cx="340" cy="60"  r="4"  fill="var(--color-amber-500)" />
+
+            <!-- Brand-500 secondary nodes -->
+            <circle cx="180" cy="220" r="4"  fill="var(--color-brand-500)" />
+            <circle cx="260" cy="140" r="5"  fill="var(--color-brand-500)" />
+            <circle cx="320" cy="80"  r="3.5" fill="var(--color-brand-500)" />
+
+            <!-- Brand-200 background nodes -->
+            <circle cx="160" cy="240" r="3"  fill="var(--color-brand-200)" />
+            <circle cx="240" cy="160" r="3"  fill="var(--color-brand-200)" />
+            <circle cx="280" cy="120" r="3.5" fill="var(--color-brand-200)" />
+            <circle cx="360" cy="120" r="3"  fill="var(--color-brand-200)" />
+            <circle cx="370" cy="190" r="2.5" fill="var(--color-brand-200)" />
+            <circle cx="200" cy="30"  r="3"  fill="var(--color-brand-200)" />
+
+            <!-- Focal point glow -->
+            <circle cx="60" cy="340" r="12" fill="var(--color-amber-500)" opacity="0.2" />
+            <circle cx="60" cy="340" r="6"  fill="var(--color-amber-500)" />
+
+            <!-- Connecting dashed arcs for "data network" feel -->
+            <path
+              d="M140 260 Q190 200 220 180"
+              stroke="var(--color-brand-500)"
+              stroke-width="1"
+              stroke-dasharray="4 4"
+              stroke-opacity="0.4"
+              fill="none"
+            />
+            <path
+              d="M220 180 Q260 130 300 100"
+              stroke="var(--color-brand-500)"
+              stroke-width="1"
+              stroke-dasharray="4 4"
+              stroke-opacity="0.4"
+              fill="none"
+            />
+            <path
+              d="M300 100 Q320 75 340 60"
+              stroke="var(--color-amber-500)"
+              stroke-width="1.5"
+              stroke-dasharray="4 4"
+              stroke-opacity="0.5"
+              fill="none"
+            />
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
