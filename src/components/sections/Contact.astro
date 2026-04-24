@@ -271,6 +271,16 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
     statusBox.classList.add("hidden");
   };
 
+  const translateServerError = (message) => {
+    const normalized = (message || "").toLowerCase();
+    if (!normalized) return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
+    if (normalized.includes("invalid email")) return "Ingresá un email válido.";
+    if (normalized.includes("required")) return "Completá los campos obligatorios antes de enviar.";
+    if (normalized.includes("too many submissions")) return "Hubo demasiados intentos. Esperá un momento y volvé a probar.";
+    if (normalized.includes("form not found")) return "El formulario de contacto no está disponible en este momento.";
+    return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
+  };
+
   const validateField = (field) => {
     const message = field.validate(field.input.value);
     setFieldError(field, message);
@@ -312,7 +322,7 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
 
       if (!response.ok) {
         const data = await response.json().catch(() => null);
-        const message = data?.errors?.[0]?.message || "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
+        const message = translateServerError(data?.errors?.[0]?.message);
         throw new Error(message);
       }
 
