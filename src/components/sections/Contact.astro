@@ -1,6 +1,8 @@
 ---
 /* Contact / Contacto section - dark background with form and contact info */
 import { SITE } from "@/lib/constants";
+
+const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
 ---
 
 <section id="contacto" class="py-24 bg-brand-800">
@@ -23,7 +25,7 @@ import { SITE } from "@/lib/constants";
 
       <!-- Left column: contact form -->
       <div class="fade-in-up lg:col-span-3">
-        <form action={`https://formspree.io/f/${SITE.formspreeId}`} method="POST">
+        <form id="contact-form" action={formAction} method="POST" novalidate>
           <!-- Row 1: Nombre + Empresa -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
@@ -33,8 +35,10 @@ import { SITE } from "@/lib/constants";
                 id="contact-name"
                 name="name"
                 required
+                aria-describedby="contact-name-error"
                 class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
+              <p id="contact-name-error" class="mt-2 text-sm text-red-300 hidden"></p>
             </div>
             <div>
               <label for="contact-company" class="block text-sm font-medium text-slate-300 mb-2">Empresa *</label>
@@ -43,8 +47,10 @@ import { SITE } from "@/lib/constants";
                 id="contact-company"
                 name="company"
                 required
+                aria-describedby="contact-company-error"
                 class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
+              <p id="contact-company-error" class="mt-2 text-sm text-red-300 hidden"></p>
             </div>
           </div>
 
@@ -57,8 +63,11 @@ import { SITE } from "@/lib/constants";
                 id="contact-email"
                 name="email"
                 required
+                inputmode="email"
+                aria-describedby="contact-email-error"
                 class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
+              <p id="contact-email-error" class="mt-2 text-sm text-red-300 hidden"></p>
             </div>
             <div>
               <label for="contact-phone" class="block text-sm font-medium text-slate-300 mb-2">Teléfono</label>
@@ -66,8 +75,10 @@ import { SITE } from "@/lib/constants";
                 type="tel"
                 id="contact-phone"
                 name="phone"
+                aria-describedby="contact-phone-error"
                 class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
               />
+              <p id="contact-phone-error" class="mt-2 text-sm text-red-300 hidden"></p>
             </div>
           </div>
 
@@ -79,16 +90,21 @@ import { SITE } from "@/lib/constants";
               name="message"
               required
               rows="4"
+              aria-describedby="contact-message-error"
               class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
             ></textarea>
+            <p id="contact-message-error" class="mt-2 text-sm text-red-300 hidden"></p>
           </div>
 
           <!-- Hidden subject -->
           <input type="hidden" name="_subject" value="Nueva consulta desde blitzeninsights.com" />
 
+          <div id="contact-form-status" class="mb-6 hidden rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
+
           <!-- Submit button -->
           <button
             type="submit"
+            id="contact-submit"
             class="w-full sm:w-auto bg-amber-500 text-brand-800 font-semibold px-8 py-4 rounded-lg hover:bg-amber-400 transition-colors text-lg cursor-pointer"
           >
             Enviar mensaje
@@ -171,3 +187,143 @@ import { SITE } from "@/lib/constants";
     </div>
   </div>
 </section>
+
+<script is:inline define:vars={{ formAction }}>
+  const form = document.querySelector("#contact-form");
+  const submitButton = document.querySelector("#contact-submit");
+  const statusBox = document.querySelector("#contact-form-status");
+
+  const fields = {
+    name: {
+      input: document.querySelector("#contact-name"),
+      error: document.querySelector("#contact-name-error"),
+      validate(value) {
+        if (!value.trim()) return "Ingresá tu nombre.";
+        if (value.trim().length < 2) return "El nombre es demasiado corto.";
+        return "";
+      },
+    },
+    company: {
+      input: document.querySelector("#contact-company"),
+      error: document.querySelector("#contact-company-error"),
+      validate(value) {
+        if (!value.trim()) return "Ingresá el nombre de la empresa.";
+        if (value.trim().length < 2) return "La empresa es demasiado corta.";
+        return "";
+      },
+    },
+    email: {
+      input: document.querySelector("#contact-email"),
+      error: document.querySelector("#contact-email-error"),
+      validate(value) {
+        if (!value.trim()) return "Ingresá tu email.";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
+          return "Ingresá un email válido.";
+        }
+        return "";
+      },
+    },
+    phone: {
+      input: document.querySelector("#contact-phone"),
+      error: document.querySelector("#contact-phone-error"),
+      validate(value) {
+        const normalized = value.trim();
+        if (!normalized) return "";
+        if (!/^[+\d\s()\-]{6,}$/.test(normalized)) {
+          return "Ingresá un teléfono válido o dejalo vacío.";
+        }
+        return "";
+      },
+    },
+    message: {
+      input: document.querySelector("#contact-message"),
+      error: document.querySelector("#contact-message-error"),
+      validate(value) {
+        if (!value.trim()) return "Contanos brevemente qué necesitás.";
+        if (value.trim().length < 10) return "El mensaje es demasiado corto.";
+        return "";
+      },
+    },
+  };
+
+  const setFieldError = (field, message) => {
+    field.input.setAttribute("aria-invalid", message ? "true" : "false");
+    field.input.classList.toggle("border-red-400", Boolean(message));
+    field.input.classList.toggle("focus:ring-red-400/40", Boolean(message));
+    field.error.textContent = message;
+    field.error.classList.toggle("hidden", !message);
+  };
+
+  const setStatus = (message, type) => {
+    statusBox.textContent = message;
+    statusBox.className =
+      "mb-6 rounded-lg border px-4 py-3 text-sm";
+    statusBox.classList.remove("hidden");
+    if (type === "success") {
+      statusBox.classList.add("border-emerald-400/40", "bg-emerald-500/10", "text-emerald-200");
+      return;
+    }
+    statusBox.classList.add("border-red-400/40", "bg-red-500/10", "text-red-200");
+  };
+
+  const clearStatus = () => {
+    statusBox.textContent = "";
+    statusBox.classList.add("hidden");
+  };
+
+  const validateField = (field) => {
+    const message = field.validate(field.input.value);
+    setFieldError(field, message);
+    return !message;
+  };
+
+  Object.values(fields).forEach((field) => {
+    field.input?.addEventListener("blur", () => validateField(field));
+    field.input?.addEventListener("input", () => {
+      if (field.input.getAttribute("aria-invalid") === "true") {
+        validateField(field);
+      }
+      clearStatus();
+    });
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    clearStatus();
+
+    const isValid = Object.values(fields).every((field) => validateField(field));
+    if (!isValid) {
+      setStatus("Revisá los campos marcados antes de enviar.", "error");
+      return;
+    }
+
+    const originalText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+
+    try {
+      const response = await fetch(formAction, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: new FormData(form),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        const message = data?.errors?.[0]?.message || "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
+        throw new Error(message);
+      }
+
+      form.reset();
+      Object.values(fields).forEach((field) => setFieldError(field, ""));
+      setStatus("Mensaje enviado. Te vamos a responder dentro de las próximas 24 horas hábiles.", "success");
+    } catch (error) {
+      setStatus(error.message || "Ocurrió un error al enviar el formulario.", "error");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  });
+</script>
