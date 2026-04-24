@@ -10,7 +10,7 @@ export const SITE = {
   whatsappMessage:
     "Hola! Me interesa conocer más sobre los servicios de Blitzen Insights.",
   address: "Buenos Aires, Argentina",
-  formspreeId: "xwpkjqvl",
+  formspreeId: "mojyrnpl",
   gaId: "G-910LX0KGER",
 };
 

@@ -1,5 +1,6 @@
 ---
 /* Contact / Contacto section - dark background with form and contact info */
+import { SITE } from "@/lib/constants";
 ---
 
 <section id="contacto" class="py-24 bg-brand-800">
@@ -22,7 +23,7 @@
 
       <!-- Left column: contact form -->
       <div class="fade-in-up lg:col-span-3">
-        <form action="https://formspree.io/f/xwpkjqvl" method="POST">
+        <form action={`https://formspree.io/f/${SITE.formspreeId}`} method="POST">
           <!-- Row 1: Nombre + Empresa -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
             <div>
