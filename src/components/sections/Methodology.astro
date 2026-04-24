@@ -3,7 +3,14 @@
 ---
 
 <section id="metodologia" class="py-24 bg-brand-800 relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Subtle ambient glow -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-60"
+    aria-hidden="true"
+    style="background-image: radial-gradient(ellipse 60% 45% at 50% 0%, rgba(245,158,11,0.08), transparent 60%), radial-gradient(ellipse 70% 50% at 50% 100%, rgba(37,99,235,0.12), transparent 60%);"
+  ></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Section heading -->
     <div class="text-center fade-in-up">
@@ -21,15 +28,16 @@
     <!-- Steps timeline -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative stagger-children">
 
-      <!-- Connecting horizontal line (desktop only) -->
+      <!-- Connecting horizontal line with gradient (desktop only) -->
       <div
-        class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-brand-600"
+        class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px"
+        style="background-image: linear-gradient(to right, transparent, rgba(22, 58, 107, 0.8) 12%, rgba(245, 158, 11, 0.5) 50%, rgba(22, 58, 107, 0.8) 88%, transparent);"
         aria-hidden="true"
       ></div>
 
       <!-- Step 1 -->
       <div class="relative z-10 text-center fade-in-up">
-        <div class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-amber-500 text-brand-800">
+        <div class="method-step method-step--accent relative w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-amber-500 text-brand-800">
           1
         </div>
         <h3 class="text-lg font-semibold text-white mb-2">Diagnóstico</h3>
@@ -41,7 +49,7 @@
 
       <!-- Step 2 -->
       <div class="relative z-10 text-center fade-in-up">
-        <div class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-brand-600 text-white border-2 border-brand-500">
+        <div class="method-step relative w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-brand-600 text-white border-2 border-brand-500">
           2
         </div>
         <h3 class="text-lg font-semibold text-white mb-2">Estrategia</h3>
@@ -52,7 +60,7 @@
 
       <!-- Step 3 -->
       <div class="relative z-10 text-center fade-in-up">
-        <div class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-brand-600 text-white border-2 border-brand-500">
+        <div class="method-step relative w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-brand-600 text-white border-2 border-brand-500">
           3
         </div>
         <h3 class="text-lg font-semibold text-white mb-2">Implementación</h3>
@@ -64,7 +72,7 @@
 
       <!-- Step 4 -->
       <div class="relative z-10 text-center fade-in-up">
-        <div class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-amber-500 text-brand-800">
+        <div class="method-step method-step--accent relative w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center text-xl font-bold bg-amber-500 text-brand-800">
           4
         </div>
         <h3 class="text-lg font-semibold text-white mb-2">Medición & Ajuste</h3>
@@ -77,3 +85,26 @@
     </div>
   </div>
 </section>
+
+<style>
+  .method-step--accent {
+    box-shadow:
+      0 0 0 4px rgba(245, 158, 11, 0.12),
+      0 8px 24px -8px rgba(245, 158, 11, 0.45);
+  }
+
+  .method-step::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 1px dashed rgba(245, 158, 11, 0.25);
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+  }
+
+  .fade-in-up:hover .method-step::after {
+    opacity: 1;
+  }
+</style>

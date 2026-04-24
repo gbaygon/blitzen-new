@@ -2,7 +2,7 @@ export const SITE = {
   name: "Blitzen Insights",
   tagline: "Inteligencia de Mercados",
   description:
-    "Somos tu socio estratégico para construir áreas comerciales escalables. +10 años transformando empresas B2B y B2C en Argentina.",
+    "Somos tu socio estratégico para construir áreas comerciales escalables, potenciados con inteligencia artificial. +10 años transformando empresas B2B y B2C en Argentina.",
   url: "https://www.blitzeninsights.com",
   email: "paula@blitzeninsights.com",
   phone: "(011) 3184-5820",
@@ -32,13 +32,13 @@ export const SERVICES = [
   {
     title: "Inteligencia de Datos & Bases Ad-Hoc",
     description:
-      "Bases de datos personalizadas por industria. Información precisa y actualizada para que tomes decisiones con fundamento.",
+      "Bases de datos personalizadas por industria. Investigación acelerada con inteligencia artificial para entregarte información precisa y actualizada, y que tomes decisiones con fundamento.",
     icon: "data",
   },
   {
     title: "Prospección Inteligente",
     description:
-      "Identificación de leads calificados, frameworks de calificación y estrategias de outbound que generan oportunidades reales.",
+      "Identificación de leads calificados apoyada en inteligencia artificial, frameworks de calificación y estrategias de outbound que generan oportunidades reales.",
     icon: "prospecting",
   },
   {
@@ -50,7 +50,7 @@ export const SERVICES = [
   {
     title: "Capacitación & Workshops",
     description:
-      "Training de equipos de ventas y talleres de inteligencia de mercado. Tu equipo aprende metodologías que puede aplicar desde el día uno.",
+      "Training de equipos de ventas y talleres de inteligencia de mercado, incluyendo herramientas de IA aplicadas al trabajo comercial. Tu equipo aprende metodologías que puede aplicar desde el día uno.",
     icon: "training",
   },
   {
@@ -65,7 +65,7 @@ export const DIFFERENTIATORS = [
   {
     title: "Inversión inteligente",
     description:
-      "Alto impacto sin la sobrecarga de las grandes consultoras. Soluciones a medida que maximizan cada peso invertido.",
+      "Alto impacto sin la sobrecarga de las grandes consultoras. Apalancamos inteligencia artificial para ganar eficiencia y maximizar cada peso invertido.",
     icon: "investment",
   },
   {
