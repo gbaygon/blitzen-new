@@ -1,0 +1,46 @@
+---
+export interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 48, class: className = "" } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  width={size}
+  height={size}
+  fill="none"
+  role="img"
+  aria-label="Blitzen Insights"
+  class={className}
+>
+  {/* Lighthouse body — wide trapezoid (kept from original for recognizability) */}
+  <polygon points="24,56 40,56 36,24 28,24" fill="#2563eb" />
+
+  {/* Windows */}
+  <rect x="30" y="30" width="4" height="4" rx="0.5" fill="#ffffff" opacity="0.85" />
+  <rect x="30" y="38" width="4" height="4" rx="0.5" fill="#ffffff" opacity="0.85" />
+  <rect x="30" y="46" width="4" height="4" rx="0.5" fill="#ffffff" opacity="0.85" />
+
+  {/* Lantern room */}
+  <rect x="27" y="18" width="10" height="6" rx="1" fill="#2563eb" />
+
+  {/* Lantern cap — taller, flush with lantern width for sharper pyramid */}
+  <polygon points="27,18 37,18 32,11" fill="#2563eb" />
+
+  {/* Light beams — single convergent origin at upper-right of lantern */}
+  <line x1="36" y1="18" x2="48" y2="14" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+  <line x1="36" y1="18" x2="52" y2="10" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+  <line x1="36" y1="18" x2="56" y2="4" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" />
+
+  {/* Light dots — decreasing outward to suggest distance */}
+  <circle cx="48" cy="14" r="2.75" fill="#f59e0b" />
+  <circle cx="52" cy="10" r="2.5" fill="#f59e0b" />
+  <circle cx="56" cy="4" r="2.25" fill="#f59e0b" />
+
+  {/* Base platform */}
+  <rect x="22" y="56" width="20" height="3" rx="1" fill="#2563eb" />
+</svg>
