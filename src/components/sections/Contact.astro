@@ -1,205 +1,396 @@
 ---
-/* Contact / Contacto section - dark background with form and contact info */
+/* Contact / Contacto section - premium redesign */
 import { SITE } from "@/lib/constants";
 
 const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
+const whatsappHref = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(SITE.whatsappMessage)}`;
+
+const inputClasses =
+  "w-full bg-brand-900/50 border border-white/10 rounded-lg px-4 py-3 text-white text-[15px] placeholder:text-slate-500 transition-colors hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-amber-400/25 focus:border-amber-400";
 ---
 
-<section id="contacto" class="py-24 bg-brand-800">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="contacto" class="relative py-24 bg-brand-800 overflow-hidden">
+  <!-- Ambient glow backdrop -->
+  <div
+    class="absolute inset-0 pointer-events-none opacity-70"
+    aria-hidden="true"
+    style="background-image: radial-gradient(ellipse 60% 40% at 80% 0%, rgba(245,158,11,0.08), transparent 60%), radial-gradient(ellipse 60% 50% at 10% 100%, rgba(37,99,235,0.14), transparent 60%);"
+  ></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section heading -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 fade-in-up">
       <p class="uppercase text-sm tracking-widest font-semibold text-amber-500 mb-3">
         CONTACTO
       </p>
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
         Empecemos a trabajar juntos
       </h2>
-      <p class="text-lg text-slate-300 text-center max-w-2xl mx-auto">
-        Contanos sobre tu empresa y te contactamos en menos de 24 horas.
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto">
+        Contanos sobre tu empresa y te respondemos en menos de 24 horas hábiles.
       </p>
     </div>
 
     <!-- Two-column layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
 
-      <!-- Left column: contact form -->
+      <!-- Left column: form card -->
       <div class="fade-in-up lg:col-span-3">
-        <form id="contact-form" action={formAction} method="POST" novalidate>
-          <!-- Row 1: Nombre + Empresa -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label for="contact-name" class="block text-sm font-medium text-slate-300 mb-2">Nombre *</label>
-              <input
-                type="text"
-                id="contact-name"
-                name="name"
-                required
-                aria-describedby="contact-name-error"
-                class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
-              />
-              <p id="contact-name-error" class="mt-2 text-sm text-red-300 hidden"></p>
-            </div>
-            <div>
-              <label for="contact-company" class="block text-sm font-medium text-slate-300 mb-2">Empresa *</label>
-              <input
-                type="text"
-                id="contact-company"
-                name="company"
-                required
-                aria-describedby="contact-company-error"
-                class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
-              />
-              <p id="contact-company-error" class="mt-2 text-sm text-red-300 hidden"></p>
+        <div class="relative rounded-2xl bg-gradient-to-br from-brand-700/50 to-brand-800/70 border border-brand-600/40 shadow-2xl shadow-brand-900/40 backdrop-blur-sm">
+          <!-- Amber accent line -->
+          <div
+            class="absolute top-0 left-10 right-10 h-px bg-gradient-to-r from-transparent via-amber-500/70 to-transparent"
+            aria-hidden="true"
+          ></div>
+
+          <div class="p-7 sm:p-10">
+            <!-- Form -->
+            <form id="contact-form" action={formAction} method="POST" novalidate>
+              <!-- Header -->
+              <div class="mb-8">
+                <span class="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] font-semibold text-amber-400 mb-3">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-400" aria-hidden="true"></span>
+                  Consulta gratuita
+                </span>
+                <h3 class="text-xl font-semibold text-white">
+                  Contanos sobre tu proyecto
+                </h3>
+                <p class="text-sm text-slate-400 mt-1.5">
+                  Los campos marcados con <span class="text-amber-400">*</span> son obligatorios.
+                </p>
+              </div>
+
+              <!-- Fields -->
+              <div class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <!-- Nombre -->
+                  <div>
+                    <label for="contact-name" class="block text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-2">
+                      Nombre <span class="text-amber-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="contact-name"
+                      name="name"
+                      required
+                      autocomplete="name"
+                      placeholder="María García"
+                      aria-describedby="contact-name-error"
+                      class={inputClasses}
+                    />
+                    <p id="contact-name-error" class="mt-2 text-sm text-red-300/95 hidden"></p>
+                  </div>
+
+                  <!-- Empresa (opcional) -->
+                  <div>
+                    <label for="contact-company" class="block text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-2">
+                      Empresa <span class="text-slate-500 normal-case tracking-normal font-normal text-xs">(opcional)</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="contact-company"
+                      name="company"
+                      autocomplete="organization"
+                      placeholder="Nombre de tu empresa"
+                      aria-describedby="contact-company-error"
+                      class={inputClasses}
+                    />
+                    <p id="contact-company-error" class="mt-2 text-sm text-red-300/95 hidden"></p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <!-- Email -->
+                  <div>
+                    <label for="contact-email" class="block text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-2">
+                      Email <span class="text-amber-400">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="contact-email"
+                      name="email"
+                      required
+                      inputmode="email"
+                      autocomplete="email"
+                      placeholder="vos@empresa.com"
+                      aria-describedby="contact-email-error"
+                      class={inputClasses}
+                    />
+                    <p id="contact-email-error" class="mt-2 text-sm text-red-300/95 hidden"></p>
+                  </div>
+
+                  <!-- Teléfono (opcional) -->
+                  <div>
+                    <label for="contact-phone" class="block text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-2">
+                      Teléfono <span class="text-slate-500 normal-case tracking-normal font-normal text-xs">(opcional)</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="contact-phone"
+                      name="phone"
+                      autocomplete="tel"
+                      placeholder="+54 11 1234-5678"
+                      aria-describedby="contact-phone-error"
+                      class={inputClasses}
+                    />
+                    <p id="contact-phone-error" class="mt-2 text-sm text-red-300/95 hidden"></p>
+                  </div>
+                </div>
+
+                <!-- Mensaje -->
+                <div>
+                  <label for="contact-message" class="block text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-2">
+                    ¿En qué podemos ayudarte? <span class="text-amber-400">*</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    rows="5"
+                    placeholder="Contanos brevemente qué estás buscando: diagnóstico comercial, prospección, capacitación..."
+                    aria-describedby="contact-message-error"
+                    class={`${inputClasses} resize-none`}
+                  ></textarea>
+                  <p id="contact-message-error" class="mt-2 text-sm text-red-300/95 hidden"></p>
+                </div>
+              </div>
+
+              <!-- Hidden subject for Formspree -->
+              <input type="hidden" name="_subject" value="Nueva consulta desde blitzeninsights.com" />
+
+              <!-- Status banner (errors only) -->
+              <div
+                id="contact-form-status"
+                class="mt-6 hidden items-start gap-3 rounded-lg border border-red-400/40 bg-red-500/10 px-4 py-3 text-sm text-red-200"
+                role="status"
+                aria-live="polite"
+              >
+                <svg class="w-5 h-5 mt-0.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4M12 16h.01" stroke-linecap="round" />
+                </svg>
+                <span id="contact-form-status-text"></span>
+              </div>
+
+              <!-- Submit button -->
+              <button
+                type="submit"
+                id="contact-submit"
+                class="group mt-7 w-full inline-flex items-center justify-center gap-2 bg-amber-500 text-brand-800 font-semibold px-8 py-4 rounded-lg hover:bg-amber-400 active:scale-[0.99] transition-all text-base cursor-pointer disabled:opacity-70 disabled:cursor-wait"
+              >
+                <span id="contact-submit-text">Enviar consulta</span>
+                <svg id="contact-submit-arrow" class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg id="contact-submit-spinner" class="hidden w-4 h-4 animate-spin" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" opacity="0.25" />
+                  <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" />
+                </svg>
+              </button>
+
+              <!-- Privacy note -->
+              <p class="text-xs text-slate-500 mt-4 text-center">
+                Solo usamos tus datos para responderte. Sin spam.
+              </p>
+            </form>
+
+            <!-- Success state (replaces form on successful submit) -->
+            <div id="contact-success" class="hidden text-center py-8">
+              <div class="relative inline-flex items-center justify-center mb-6">
+                <div class="absolute inset-0 rounded-full bg-amber-500/25 blur-2xl" aria-hidden="true"></div>
+                <div class="relative w-20 h-20 rounded-full bg-amber-500/15 border border-amber-400/40 flex items-center justify-center">
+                  <svg class="w-9 h-9 text-amber-400 success-check" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-2xl font-bold text-white mb-3">
+                ¡Recibimos tu mensaje!
+              </h3>
+              <p class="text-slate-300 max-w-md mx-auto mb-8">
+                Te vamos a responder dentro de las próximas 24 horas hábiles al email que nos indicaste.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 bg-amber-500 text-brand-800 font-semibold px-6 py-3 rounded-lg hover:bg-amber-400 transition-colors"
+                >
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                  </svg>
+                  Seguí por WhatsApp
+                </a>
+                <button
+                  type="button"
+                  id="contact-reset"
+                  class="inline-flex items-center justify-center gap-2 border border-brand-500/40 text-white px-6 py-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+                >
+                  Enviar otro mensaje
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- Row 2: Email + Teléfono -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-            <div>
-              <label for="contact-email" class="block text-sm font-medium text-slate-300 mb-2">Email *</label>
-              <input
-                type="email"
-                id="contact-email"
-                name="email"
-                required
-                inputmode="email"
-                aria-describedby="contact-email-error"
-                class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
-              />
-              <p id="contact-email-error" class="mt-2 text-sm text-red-300 hidden"></p>
-            </div>
-            <div>
-              <label for="contact-phone" class="block text-sm font-medium text-slate-300 mb-2">Teléfono</label>
-              <input
-                type="tel"
-                id="contact-phone"
-                name="phone"
-                aria-describedby="contact-phone-error"
-                class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
-              />
-              <p id="contact-phone-error" class="mt-2 text-sm text-red-300 hidden"></p>
-            </div>
-          </div>
-
-          <!-- Mensaje -->
-          <div class="mb-6">
-            <label for="contact-message" class="block text-sm font-medium text-slate-300 mb-2">Mensaje *</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              required
-              rows="4"
-              aria-describedby="contact-message-error"
-              class="w-full bg-brand-700/50 border border-brand-600/50 rounded-lg px-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
-            ></textarea>
-            <p id="contact-message-error" class="mt-2 text-sm text-red-300 hidden"></p>
-          </div>
-
-          <!-- Hidden subject -->
-          <input type="hidden" name="_subject" value="Nueva consulta desde blitzeninsights.com" />
-
-          <div id="contact-form-status" class="mb-6 hidden rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
-
-          <!-- Submit button -->
-          <button
-            type="submit"
-            id="contact-submit"
-            class="w-full sm:w-auto bg-amber-500 text-brand-800 font-semibold px-8 py-4 rounded-lg hover:bg-amber-400 transition-colors text-lg cursor-pointer"
-          >
-            Enviar mensaje
-          </button>
-        </form>
+        </div>
       </div>
 
-      <!-- Right column: contact info -->
-      <div class="fade-in-up lg:col-span-2">
-        <div class="space-y-8">
-
-          <!-- Email -->
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-lg bg-brand-700/50 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500" aria-hidden="true">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="M22 4L12 13 2 4" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm text-slate-400">Email</p>
-              <a href="mailto:paula@blitzeninsights.com" class="text-white font-medium hover:text-amber-400 transition-colors">
-                paula@blitzeninsights.com
-              </a>
-            </div>
-          </div>
-
-          <!-- Teléfono -->
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-lg bg-brand-700/50 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm text-slate-400">Teléfono</p>
-              <a href="tel:+541131845820" class="text-white font-medium hover:text-amber-400 transition-colors">
-                (011) 3184-5820
-              </a>
-            </div>
-          </div>
-
-          <!-- WhatsApp -->
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-lg bg-brand-700/50 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-amber-500" aria-hidden="true">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm text-slate-400">WhatsApp</p>
-              <a href="https://wa.me/5491131845820?text=Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20servicios%20de%20Blitzen%20Insights." target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-amber-400 transition-colors">
-                Escribinos por WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <!-- Ubicación -->
-          <div class="flex gap-4">
-            <div class="w-12 h-12 rounded-lg bg-brand-700/50 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm text-slate-400">Ubicación</p>
-              <p class="text-white font-medium">Buenos Aires, Argentina</p>
-            </div>
-          </div>
-
+      <!-- Right column: what's next + direct channels -->
+      <div class="fade-in-up lg:col-span-2 space-y-6">
+        <!-- Qué pasa después -->
+        <div class="rounded-2xl border border-brand-600/40 bg-brand-700/20 p-7 sm:p-8">
+          <p class="text-[11px] uppercase tracking-[0.18em] font-semibold text-amber-500 mb-5">
+            Qué pasa después
+          </p>
+          <ol class="space-y-5">
+            <li class="flex gap-4">
+              <span class="shrink-0 w-8 h-8 rounded-full border border-amber-400/40 bg-amber-500/10 text-amber-400 text-sm font-bold flex items-center justify-center" aria-hidden="true">1</span>
+              <div>
+                <p class="text-white font-medium text-sm mb-1">Respondemos tu consulta</p>
+                <p class="text-slate-400 text-sm leading-relaxed">En menos de 24 horas hábiles, por el canal que prefieras.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="shrink-0 w-8 h-8 rounded-full border border-amber-400/40 bg-amber-500/10 text-amber-400 text-sm font-bold flex items-center justify-center" aria-hidden="true">2</span>
+              <div>
+                <p class="text-white font-medium text-sm mb-1">Agendamos una llamada</p>
+                <p class="text-slate-400 text-sm leading-relaxed">30 minutos para entender tu contexto y detectar oportunidades.</p>
+              </div>
+            </li>
+            <li class="flex gap-4">
+              <span class="shrink-0 w-8 h-8 rounded-full border border-amber-400/40 bg-amber-500/10 text-amber-400 text-sm font-bold flex items-center justify-center" aria-hidden="true">3</span>
+              <div>
+                <p class="text-white font-medium text-sm mb-1">Te llevamos una propuesta</p>
+                <p class="text-slate-400 text-sm leading-relaxed">Un plan concreto, con alcance, plazos y métricas claras.</p>
+              </div>
+            </li>
+          </ol>
         </div>
 
-        <!-- Response time note -->
-        <p class="text-sm text-slate-400 mt-8 border-t border-brand-700 pt-8">
-          Respondemos todas las consultas en menos de 24 horas hábiles.
-        </p>
+        <!-- Canales directos -->
+        <div class="rounded-2xl border border-brand-600/40 bg-brand-700/20 p-7 sm:p-8">
+          <p class="text-[11px] uppercase tracking-[0.18em] font-semibold text-amber-500 mb-5">
+            Canales directos
+          </p>
+          <ul class="space-y-3">
+            <li>
+              <a href={`mailto:${SITE.email}`} class="group flex items-center gap-4 -mx-2 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-900/60 border border-brand-600/40 flex items-center justify-center shrink-0 group-hover:border-amber-400/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M22 4L12 13 2 4" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-[11px] uppercase tracking-wider text-slate-400">Email</p>
+                  <p class="text-white font-medium text-sm truncate group-hover:text-amber-400 transition-colors">{SITE.email}</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href={`tel:+${SITE.whatsapp}`} class="group flex items-center gap-4 -mx-2 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-900/60 border border-brand-600/40 flex items-center justify-center shrink-0 group-hover:border-amber-400/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-slate-400">Teléfono</p>
+                  <p class="text-white font-medium text-sm group-hover:text-amber-400 transition-colors">{SITE.phone}</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href={whatsappHref} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 -mx-2 px-2 py-2 rounded-lg hover:bg-white/5 transition-colors">
+                <div class="w-10 h-10 rounded-lg bg-brand-900/60 border border-brand-600/40 flex items-center justify-center shrink-0 group-hover:border-amber-400/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-amber-400" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-slate-400">WhatsApp</p>
+                  <p class="text-white font-medium text-sm group-hover:text-amber-400 transition-colors">Escribinos directo</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <div class="flex items-center gap-4 -mx-2 px-2 py-2">
+                <div class="w-10 h-10 rounded-lg bg-brand-900/60 border border-brand-600/40 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-slate-400">Ubicación</p>
+                  <p class="text-white font-medium text-sm">{SITE.address}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
+<style is:global>
+  /* Chrome autofill fix so dark inputs don't flash light blue */
+  #contact-form input:-webkit-autofill,
+  #contact-form input:-webkit-autofill:hover,
+  #contact-form input:-webkit-autofill:focus,
+  #contact-form textarea:-webkit-autofill,
+  #contact-form textarea:-webkit-autofill:hover,
+  #contact-form textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff;
+    -webkit-box-shadow: 0 0 0 1000px rgba(7, 14, 26, 0.65) inset;
+    caret-color: #ffffff;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  #contact-form-status.is-visible {
+    display: flex;
+  }
+
+  .success-check {
+    animation: contact-success-pop 0.45s ease-out;
+  }
+
+  @keyframes contact-success-pop {
+    from {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+</style>
+
 <script is:inline define:vars={{ formAction }}>
   const form = document.querySelector("#contact-form");
   const submitButton = document.querySelector("#contact-submit");
+  const submitText = document.querySelector("#contact-submit-text");
+  const submitArrow = document.querySelector("#contact-submit-arrow");
+  const submitSpinner = document.querySelector("#contact-submit-spinner");
   const statusBox = document.querySelector("#contact-form-status");
+  const statusText = document.querySelector("#contact-form-status-text");
+  const successBox = document.querySelector("#contact-success");
+  const resetButton = document.querySelector("#contact-reset");
 
   const fields = {
     name: {
       input: document.querySelector("#contact-name"),
       error: document.querySelector("#contact-name-error"),
       validate(value) {
-        if (!value.trim()) return "Ingresá tu nombre.";
-        if (value.trim().length < 2) return "El nombre es demasiado corto.";
+        if (!value.trim()) return "¿Cómo te llamás?";
+        if (value.trim().length < 2) return "El nombre parece incompleto.";
         return "";
       },
     },
@@ -207,8 +398,9 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
       input: document.querySelector("#contact-company"),
       error: document.querySelector("#contact-company-error"),
       validate(value) {
-        if (!value.trim()) return "Ingresá el nombre de la empresa.";
-        if (value.trim().length < 2) return "La empresa es demasiado corta.";
+        const normalized = value.trim();
+        if (!normalized) return "";
+        if (normalized.length < 2) return "El nombre de empresa parece incompleto.";
         return "";
       },
     },
@@ -216,9 +408,9 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
       input: document.querySelector("#contact-email"),
       error: document.querySelector("#contact-email-error"),
       validate(value) {
-        if (!value.trim()) return "Ingresá tu email.";
+        if (!value.trim()) return "Necesitamos tu email para responderte.";
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
-          return "Ingresá un email válido.";
+          return "Revisá el formato del email.";
         }
         return "";
       },
@@ -230,7 +422,7 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
         const normalized = value.trim();
         if (!normalized) return "";
         if (!/^[+\d\s()\-]{6,}$/.test(normalized)) {
-          return "Ingresá un teléfono válido o dejalo vacío.";
+          return "Revisá el teléfono o dejalo en blanco.";
         }
         return "";
       },
@@ -239,46 +431,69 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
       input: document.querySelector("#contact-message"),
       error: document.querySelector("#contact-message-error"),
       validate(value) {
-        if (!value.trim()) return "Contanos brevemente qué necesitás.";
-        if (value.trim().length < 10) return "El mensaje es demasiado corto.";
+        if (!value.trim()) return "Contanos en qué podemos ayudarte.";
+        if (value.trim().length < 10) return "Ampliá un poco más tu mensaje.";
         return "";
       },
     },
   };
 
+  const invalidClasses = ["border-red-400/70", "focus:ring-red-400/25", "focus:border-red-400"];
+
   const setFieldError = (field, message) => {
+    if (!field.input || !field.error) return;
     field.input.setAttribute("aria-invalid", message ? "true" : "false");
-    field.input.classList.toggle("border-red-400", Boolean(message));
-    field.input.classList.toggle("focus:ring-red-400/40", Boolean(message));
+    invalidClasses.forEach((cls) => field.input.classList.toggle(cls, Boolean(message)));
     field.error.textContent = message;
     field.error.classList.toggle("hidden", !message);
   };
 
-  const setStatus = (message, type) => {
-    statusBox.textContent = message;
-    statusBox.className =
-      "mb-6 rounded-lg border px-4 py-3 text-sm";
+  const showStatus = (message) => {
+    if (!statusBox || !statusText) return;
+    statusText.textContent = message;
     statusBox.classList.remove("hidden");
-    if (type === "success") {
-      statusBox.classList.add("border-emerald-400/40", "bg-emerald-500/10", "text-emerald-200");
-      return;
-    }
-    statusBox.classList.add("border-red-400/40", "bg-red-500/10", "text-red-200");
+    statusBox.classList.add("is-visible");
   };
 
   const clearStatus = () => {
-    statusBox.textContent = "";
+    if (!statusBox || !statusText) return;
+    statusText.textContent = "";
     statusBox.classList.add("hidden");
+    statusBox.classList.remove("is-visible");
+  };
+
+  const setLoading = (loading) => {
+    if (!submitButton) return;
+    submitButton.disabled = loading;
+    if (submitText) submitText.textContent = loading ? "Enviando..." : "Enviar consulta";
+    if (submitArrow) submitArrow.classList.toggle("hidden", loading);
+    if (submitSpinner) submitSpinner.classList.toggle("hidden", !loading);
+  };
+
+  const showSuccess = () => {
+    if (!form || !successBox) return;
+    form.classList.add("hidden");
+    successBox.classList.remove("hidden");
+    successBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
+
+  const showFormAgain = () => {
+    if (!form || !successBox) return;
+    successBox.classList.add("hidden");
+    form.classList.remove("hidden");
+    clearStatus();
+    Object.values(fields).forEach((field) => setFieldError(field, ""));
+    fields.name.input?.focus();
   };
 
   const translateServerError = (message) => {
     const normalized = (message || "").toLowerCase();
-    if (!normalized) return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
-    if (normalized.includes("invalid email")) return "Ingresá un email válido.";
+    if (!normalized) return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos o escribinos por WhatsApp.";
+    if (normalized.includes("invalid email")) return "Revisá el formato del email.";
     if (normalized.includes("required")) return "Completá los campos obligatorios antes de enviar.";
-    if (normalized.includes("too many submissions")) return "Hubo demasiados intentos. Esperá un momento y volvé a probar.";
-    if (normalized.includes("form not found")) return "El formulario de contacto no está disponible en este momento.";
-    return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos.";
+    if (normalized.includes("too many submissions")) return "Demasiados intentos. Esperá un momento y volvé a probar.";
+    if (normalized.includes("form not found")) return "El formulario no está disponible en este momento. Escribinos por WhatsApp mientras lo resolvemos.";
+    return "No pudimos enviar tu mensaje. Probá de nuevo en unos minutos o escribinos por WhatsApp.";
   };
 
   const validateField = (field) => {
@@ -297,26 +512,24 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
     });
   });
 
+  resetButton?.addEventListener("click", showFormAgain);
+
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     clearStatus();
 
-    const isValid = Object.values(fields).every((field) => validateField(field));
-    if (!isValid) {
-      setStatus("Revisá los campos marcados antes de enviar.", "error");
+    const results = Object.values(fields).map((field) => validateField(field));
+    if (results.some((ok) => !ok)) {
+      showStatus("Revisá los campos marcados antes de enviar.");
       return;
     }
 
-    const originalText = submitButton.textContent;
-    submitButton.disabled = true;
-    submitButton.textContent = "Enviando...";
+    setLoading(true);
 
     try {
       const response = await fetch(formAction, {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
         body: new FormData(form),
       });
 
@@ -328,12 +541,11 @@ const formAction = `https://formspree.io/f/${SITE.formspreeId}`;
 
       form.reset();
       Object.values(fields).forEach((field) => setFieldError(field, ""));
-      setStatus("Mensaje enviado. Te vamos a responder dentro de las próximas 24 horas hábiles.", "success");
+      showSuccess();
     } catch (error) {
-      setStatus(error.message || "Ocurrió un error al enviar el formulario.", "error");
+      showStatus(error.message || "Ocurrió un error al enviar el formulario.");
     } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = originalText;
+      setLoading(false);
     }
   });
 </script>
